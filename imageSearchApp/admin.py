@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 
-from imageSearchApp.models import Group, Name, Date, Image
+from imageSearchApp.models import ImageData, Image
 # from .models import *
 
 # Image 클래스를 inline으로 나타내기
@@ -14,7 +14,5 @@ class ImageInline(admin.TabularInline):
 class ImageAdmin(admin.ModelAdmin):
     inlines = [ImageInline, ]
 
-admin.site.register(Group)
-admin.site.register(Name)
-admin.site.register(Date)
+admin.site.register(ImageData)
 admin.site.register(Image)
