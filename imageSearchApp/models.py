@@ -2,45 +2,51 @@ from django.db import models
 
 # Create your models here.
 
-'''
+
 class ImageData(models.Model):
-    group = model.CharField(max_length = 32)
-    name = model.CharField(max_length = 32)
-    date = model.CharField(max_length = 6) # YYMMDD
-    image = models.ImageField(upload_to='image/', blank=True, null=True)
+    group = models.CharField(max_length = 32)
+    name = models.CharField(max_length = 32)
+    date = models.CharField(max_length = 6) # YYMMDD
     image_url = models.URLField(max_length=512)
+    
+    def __str__(self):
+        return self.name
+
+class Image(models.Model):
+    date = models.ForeignKey(ImageData, on_delete=models.CASCADE, null=True)
+    image = models.ImageField(upload_to='image/', blank=True, null=True)
+
+
 '''
-
-
 class Group(models.Model):
-    group = model.CharField(max_length = 32)
+    group = models.CharField(max_length = 32)
 
     def __str__(self):
         return self.group
 
 class Name(models.Model): # 일대다 관계 설정시, ForeignKey의 on_delete 옵션은 필수.
-    group = model.ForeignKey(Group, on_delete=models.CASCADE, null=True)
-    name = model.CharField(max_length = 32)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length = 32)
 
     def __str__(self):
         return self.name
 
 
 class Date(models.Model):
-    name = model.ForeignKey(Name, on_delete=models.CASCADE, null=True)
-    date = model.CharField(max_length = 6) # YYMMDD
+    name = models.ForeignKey(Name, on_delete=models.CASCADE, null=True)
+    date = models.CharField(max_length = 6) # YYMMDD
 
     def __str__(self):
         return self.date
 
 class Image(models.Model):
-    date = model.ForeignKey(Date, on_delete=models.CASCADE, null=True)
+    date = models.ForeignKey(Date, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to='image/', blank=True, null=True)
     image_url = models.URLField(max_length=512)
 
     def __str__(self):
         return self.image_url
-
+'''
 
 # 오마이걸 아린 210813 http://~~~/~~~
 # 전소미 210813 http://~~~/~~~
