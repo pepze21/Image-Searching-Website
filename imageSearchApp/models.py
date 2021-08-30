@@ -4,10 +4,9 @@ from django.db import models
 
 
 class ImageData(models.Model):
-    group = models.CharField(max_length = 32)
-    name = models.CharField(max_length = 32)
-    date = models.CharField(max_length = 6) # YYMMDD
-    image_url = models.URLField(max_length=512)
+    group = models.CharField(max_length=32)
+    name = models.CharField(max_length=32)
+    date = models.CharField(max_length=6) # YYMMDD 나중에 calendar를 터치하도록 ui 변경
     
     def __str__(self):
         return self.name
@@ -15,6 +14,7 @@ class ImageData(models.Model):
 class Image(models.Model):
     date = models.ForeignKey(ImageData, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to='image/', blank=True, null=True)
+    image_url = models.URLField(max_length=512)
 
 
 '''
