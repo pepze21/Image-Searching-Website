@@ -19,15 +19,17 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Nergul</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">KPOP IDOL image search</p>
+                    <p class="lead fw-normal text-white-50 mb-0">KPOP IDOL image search - SAVE</p>
                 </div>
             <div class="messageDiv">
-                <form action="./search/" method="POST">
+                <form action="./save/" method="POST">
                     {% csrf_token %}
                     <div class="input-group">
                         <input id="group_Content" name="group_Content" type="text" class="form-control" placeholder="Group">
                         <input id="name_Content" name="name_Content" type="text" class="form-control" placeholder="Name">
                         <input id="date_Content" name="date_Content" type="text" class="form-control" placeholder="Date(YYMMDD)">
+                        <input id="image_path_Content" name="image_path_Content" type="text" class="form-control" placeholder="Image Path">
+                        <input id="image_url_Content" name="image_url_Content" type="text" class="form-control" placeholder="Image URL">
                         <span class="input-group-btn">
                             <button class="btn btn-primary" type="submit">Search</button>
                         </span>

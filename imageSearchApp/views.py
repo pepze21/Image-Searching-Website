@@ -1,3 +1,4 @@
+from typing_extensions import ParamSpecArgs
 from django.shortcuts import render
 from django.db import models
 # Create your views here.
@@ -38,34 +39,41 @@ def search_image(request):
     context = {'image' : images}
     return render(request,'imageSearchApp/search.html', context)
 
+def save_page(request):
+    pass
+
 def save_data(request):
     imagedata = ImageData()
-    imagedata.group = request.POST['group_Content']
-    imagedata.name = request.POST['name_Content']
-    imagedata.date = request.POST['date_Content']
+    user_input_group = request.POST.get('group_Content')
+    user_input_name = request.POST.get('name_Content')
+    user_input_date = request.POST.get('date_Content')
+    imagedata.group = user_input_group
+    imagedata.name = user_input_name
+    imagedata.date = user_input_date
     imagedata.save()
 
-def save_image(request):
-    request.POST['group_Content']
-    request.POST['name_Content']
-    request.POST['date_Content']
-
     image = Image()
-    image.imagedata = imag---------
+    imagedata_filtered = ImageData.objects.filter(
+        group='user_input_group',
+        name='user_input_name',
+        date='user_input_date'
+    )    
+    image.imagedata = imagedata_filtered
     image.image_path = request.POST['image_path_Content']
     image.image_url = request.POST['image_url_Content']
     image.save()
 
-
-
-
-
+    
     # group = models.ImageData(group=user_input_group)
     # name = models.ImageData(name=user_input_name)
     # date = models.ImageData(date=user_input_date)
     
-    images = Image()
     return render(request, 'imageSearchApp/')
 
 
 
+    # id = ImageData.objects.filter(
+    #     group='user_input_group',
+    #     name='user_input_name',
+    #     date='user_input_date'
+    # ).value('id')[0]['id']

@@ -11,5 +11,6 @@ urlpatterns = [
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('search/', views.search_image, name='search_image')
+    path('search/', views.search_image, name='search_image'),
+    path('save/', views.save, name='save')
 ]
