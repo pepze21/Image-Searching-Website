@@ -12,8 +12,9 @@ class ImageData(models.Model):
         return self.name
 
 class Image(models.Model):
-    date = models.ForeignKey(ImageData, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(upload_to='image/', blank=True, null=True)
+    imagedata = models.ForeignKey(ImageData, related_name='imagedata', \
+        on_delete=models.CASCADE, null=True)
+    image_path = models.ImageField(upload_to='image/', blank=True, null=True)
     image_url = models.URLField(max_length=512)
 
 

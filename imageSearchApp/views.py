@@ -8,20 +8,57 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import ImageData, Image
-
+# from django.db.models import Q
+# # .filter(Q(title="제목") | Q(content="내용"))를 쓸 때 필요
 
 def index(request):
     return render(request, 'imageSearchApp/index.html')
 
 
 def search_image(request):
-    user_input_group = request.POST['groupContent']
-    user_input_name = request.POST['nameContent']
-    user_input_date = request.POST['dateContent']
+    user_input_group = request.POST.get('group_Content')
+    user_input_name = request.POST.get('name_Content')
+    user_input_date = request.POST.get('date_Content')
+    #.get()은 key가 존재하면 value를 리턴
+
+    imagedata = ImageData.objects.filter(
+        group='user_input_group',
+        name='user_input_name',
+        date='user_input_date'
+    )
+    images = imagedata.image.all()
+
+    # id = ImageData.objects.filter(
+    #     group='user_input_group',
+    #     name='user_input_name',
+    #     date='user_input_date'
+    # ).value('id')[0]['id']
+
+    # image = Image.objects.get(ImageData=id)
+    context = {'image' : images}
+    return render(request,'imageSearchApp/search.html', context)
+
+def save_data(request):
     imagedata = ImageData()
-    imagedata.group = user_input_group
-    imagedata.name = user_input_name
-    imagedata.date = user_input_date
+    imagedata.group = request.POST['group_Content']
+    imagedata.name = request.POST['name_Content']
+    imagedata.date = request.POST['date_Content']
+    imagedata.save()
+
+def save_image(request):
+    request.POST['group_Content']
+    request.POST['name_Content']
+    request.POST['date_Content']
+
+    image = Image()
+    image.imagedata = imag---------
+    image.image_path = request.POST['image_path_Content']
+    image.image_url = request.POST['image_url_Content']
+    image.save()
+
+
+
+
 
     # group = models.ImageData(group=user_input_group)
     # name = models.ImageData(name=user_input_name)
